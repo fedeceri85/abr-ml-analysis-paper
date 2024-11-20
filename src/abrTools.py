@@ -584,11 +584,11 @@ def fitRegModel(model,X_train,y_train,X_test=None,y_test = None,makePlot=True,ca
         c1 = cross_validate(model,X_train,y_train,scoring=scorers,n_jobs=n_jobs,cv=cv)
 
         scores = -c1['test_RMSE']**2
-        print('MSE on train '+ str(mse))
-        print('CV RMSE : ' + str( np.sqrt(-scores).mean()))
-        print('CV RMSE STD : ' + str( np.sqrt(-scores).std()))
-        print('CV R2 : ' + str(c1['test_r2'].mean()))
-        print('CV R2 STD : ' + str(c1['test_r2'].std()))
+        # print('MSE on train '+ str(mse))
+        # print('CV RMSE : ' + str( np.sqrt(-scores).mean()))
+        # print('CV RMSE STD : ' + str( np.sqrt(-scores).std()))
+        # print('CV R2 : ' + str(c1['test_r2'].mean()))
+        # print('CV R2 STD : ' + str(c1['test_r2'].std()))
 
         res = {
             'RMSE':c1['test_RMSE'],
@@ -1123,8 +1123,8 @@ def createWave1Dataset(datafolder = '../data/',waveanalysisFolder = 'waveAnalysi
     wave analysis results. Missing files are silently skipped. When addMissingAmplitudes
     is True, it fills in missing intensity values (0-95 dB in 5 dB steps) with zero amplitude.
     """
-    sixN = pd.read_excel(os.path.join(datafolder,'6N - MachineLearningABR_MouseList.xlsx'))
-    rep = pd.read_excel(os.path.join(datafolder,'Repaired - MachineLearningABR_MouseList.xlsx'))
+    sixN = pd.read_excel(os.path.join(datafolder,'6N - MachineLearningABR_ExperimentList.xlsx'))
+    rep = pd.read_excel(os.path.join(datafolder,'Repaired - MachineLearningABR_ExperimentList.xlsx'))
 
     masterAll = pd.DataFrame()
     rows = []
@@ -1460,7 +1460,7 @@ def interFunc(x,a,b,c,d):
     return a*exp(-(x-c)/b)+d 
 
 
-def loadKingsData(shift=54,scaling=False,filename = '../data/Kings - MAchineLEarningABR_ExperimentList.xlsx',dataFolder = '../data'):
+def loadKingsData(shift=54,scaling=False,filename = '../data/ReplicationCohort - MachineLEarningABR_ExperimentList.xlsx',dataFolder = '../data'):
     """
     Load and preprocess ABR (Auditory Brainstem Response) data from Kings dataset.
     This function loads ABR data from an Excel file, processes it by extracting specific 
@@ -1472,7 +1472,7 @@ def loadKingsData(shift=54,scaling=False,filename = '../data/Kings - MAchineLEar
         Number of initial data points to exclude from the final dataset
     scaling : bool, optional (default=False)
         Whether to apply scaling to the data using predetermined parameters
-    filename : str, optional (default='../data/Kings - MAchineLEarningABR_ExperimentList.xlsx')
+    filename : str, optional (default='../data/ReplicationCohort - MachineLEarningABR_ExperimentList.xlsx')
         Path to the Excel file containing the experiment list
     dataFolder : str, optional (default='../data')
         Path to the folder containing the ABR data files
