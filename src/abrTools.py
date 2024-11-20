@@ -272,11 +272,14 @@ def loadFiles(datafolder ='../data'):
     -----
     All files must be present in the specified datafolder directory
     """
-   
-    with open(os.path.join(datafolder,'Data-version.txt')) as f:
-        lines = f.readlines()
-        #print(lines)
-        dataVersion = lines[0]
+    
+    try:
+        with open(os.path.join(datafolder,'Data-version.txt')) as f:
+            lines = f.readlines()
+            #print(lines)
+            dataVersion = lines[0]
+    except FileNotFoundError:
+        dataVersion = 'None'
 
     print('The dataset version is: ' + str(dataVersion))
 
@@ -459,12 +462,13 @@ def createClassificationDataset(datafolder ='../data',test_size = 0.2,random_sta
         return (X_train,  X_test,y_train,y_test,dataVersion)
 
 
-import wandb
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_squared_error
 import socket
 
 def initWandb(project,name = str(datetime.datetime.now()), group=None,config = {},dataVersion=None, train_size = 0, test_size = 0):
+
+    import wandb
     wandb.login()
     run = wandb.init(project=project,name=name,group=group,config=config)
     wandb.config.model = group
